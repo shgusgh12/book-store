@@ -1,12 +1,20 @@
-import React from 'react';
-
-import './App.css';
+import { ThemeProvider } from 'styled-components';
+import Layout from './components/layout/Layout';
+import Home from './pages/Home';
+import { GlobalStyle } from './style/global';
+import { light, dark, ThemeName, getTheme } from './style/theme';
+import ThemeSwitcher from './components/common/header/ThemeSwitcher';
+import { useContext, useState } from 'react';
+import { BookStoreThemeProvider, ThemeContext } from './context/themeContext';
 
 function App() {
   return (
-    <div className="App">
-      book store
-    </div>
+    <BookStoreThemeProvider>
+        <ThemeSwitcher />
+        <Layout>
+          <Home />
+        </Layout>
+    </BookStoreThemeProvider>
   );
 }
 
