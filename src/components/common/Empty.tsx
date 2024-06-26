@@ -10,7 +10,7 @@ interface Props {
 function Empty({ icon, title, description }: Props) {
   return (
     <EmptyStyle>
-      {icon && <div className="icon">{/* <FaSmileWink /> */}</div>}
+      {icon && <div className="icon">{icon}</div>}
       <Title size="large" color="secondary">
         {title}
       </Title>

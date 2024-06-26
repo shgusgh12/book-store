@@ -9,8 +9,6 @@ interface Props {
 }
 
 function LikeButton({ book, onClick }: Props) {
-  console.log(book, book.liked);
-
   return (
     <LikeButtonStyle
       size="medium"

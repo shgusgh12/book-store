@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import EllipsisBox from "../components/common/EllipsisBox";
 import LikeButton from "../components/book/LikeButton";
 import AddToCart from "../components/book/AddToCart";
+import BookReview from "@/components/book/BookReview";
+import { Tab, Tabs } from "@/components/common/Tabs";
 
 function BookDetail() {
   const bookInfoList = [
@@ -52,7 +54,8 @@ function BookDetail() {
 
   //주소에서 가져옴
   const { bookId } = useParams();
-  const { book, likeToggle, changeToName } = useBook(bookId);
+  const { book, likeToggle, changeToName, reviews, addReview } =
+    useBook(bookId);
 
   //book이 null값일 수 있기때문에 객체 값을 사용못하는 경우가 있다
   //-> 얼리 return으로 해결 (null인 경우를 미리 대비한다)
@@ -88,10 +91,20 @@ function BookDetail() {
         </div>
       </header>
       <div className="content">
-        <Title size="medium">상세설명</Title>
-        <EllipsisBox lineLimit={4}>{book.detail}</EllipsisBox>
-        <Title size="medium">목차</Title>
-        <p className="index">{book.contents}</p>
+        <Tabs>
+          <Tab title="상세설명">
+            <Title size="medium">상세설명</Title>
+            <EllipsisBox lineLimit={4}>{book.detail}</EllipsisBox>
+          </Tab>
+          <Tab title="목차">
+            <Title size="medium">목차</Title>
+            <p className="index">{book.contents}</p>
+          </Tab>
+          <Tab title="리뷰">
+            <Title size="medium">리뷰</Title>
+            <BookReview reviews={reviews} onAdd={addReview} />
+          </Tab>
+        </Tabs>
       </div>
     </BookDetailStyle>
   );

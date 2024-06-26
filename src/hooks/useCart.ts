@@ -9,7 +9,11 @@ export const useCart = () => {
   const deleteCartItem = (id: number) => {
     deleteCart(id).then(() => {
       //낙관적 업데이트
-      setCarts(carts.filter((cart) => cart.id !== id));
+      setCarts((prev) => {
+        const updatedData = prev.filter((cart) => cart.id !== id);
+        setIsEmpty(updatedData.length === 0);
+        return updatedData;
+      });
     });
   };
 
